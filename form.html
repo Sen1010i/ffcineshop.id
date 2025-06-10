@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pemesanan - Nail Art</title>
+  <style>
+    /* === VARIABLES === */
+    :root {
+      --primary: #db7093;
+      --primary-dark: #c06080;
+      --primary-darker: #a05070;
+      --accent: #c71585;
+      --accent-light: #e83e8c;
+      --light-bg: #fff0f5;
+      --light-bg-secondary: #ffe4ec;
+      --text-dark: #333;
+      --text-light: #555;
+      --text-on-primary: white;
+      --border-color: #ddd;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.2);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    /* === BASE STYLES === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      color: var(--accent);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* === LAYOUT === */
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      padding: 1.25rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* === FORM PAGE === */
+    .form-header {
+      background: linear-gradient(135deg, var(--light-bg-secondary) 0%, #ffcce0 100%);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .form-header-text {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .form-header p {
+      margin: 0.5rem 0 0;
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    .btn-kembali {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: var(--primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-kembali:hover {
+      background: var(--primary-dark);
+      transform: translateX(-3px);
+    }
+
+    .btn-kembali:active {
+      transform: translateX(0);
+    }
+
+    form {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+      color: var(--accent);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.3);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .hint {
+      color: var(--text-light);
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* Loading state */
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .loading::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* === BUTTON === */
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--primary);
+      color: var(--text-on-primary);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      width: 100%;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .ripple-btn:hover,
+    .ripple-btn:focus-visible {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .ripple-btn:active {
+      transform: translateY(0);
+    }
+
+    .ripple-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .form-row .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-header {
+        padding: 2rem 1rem;
+      }
+
+      .form-header h1 {
+        font-size: 1.5rem;
+      }
+
+      form {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-kembali {
+        top: 1rem;
+        left: 1rem;
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- HEADER -->
+    <header class="form-header">
+      <a href="index.html" class="btn-kembali" title="Kembali ke Halaman Utama">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </a>
+      <div class="form-header-text">
+        <h1>Pemesanan Nail Art</h1>
+        <p>Silakan isi form berikut untuk melakukan pemesanan</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <form id="formPemesanan">
+        <div class="form-group">
+          <label for="nama">Nama Lengkap:</label>
+          <input type="text" id="nama" name="nama" required aria-required="true">
+        </div>
+
+        <div class="form-group">
+          <label for="nomor">Nomor WhatsApp:</label>
+          <input type="tel" id="nomor" name="nomor" placeholder="08xxxxxxxxxx" 
+                pattern="08[0-9]{9,13}" required aria-required="true">
+          <small class="hint">Contoh: 081234567890</small>
+        </div>
+
+        <div class="form-group">
+          <label for="desain">Pilih Desain:</label>
+          <select id="desain" name="desain" required aria-required="true">
+            <option value="">-- Pilih Desain --</option>
+            <option value="Floral and Sea">Floral and Sea</option>
+            <option value="Silver and Black">Silver and Black</option>
+            <option value="Golden Glitter">Golden Glitter</option>
+            <option value="Pastel Dream">Pastel Dream</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tanggal">Tanggal Booking:</label>
+            <input type="date" id="tanggal" name="tanggal" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="waktu">Waktu Booking:</label>
+            <input type="time" id="waktu" name="waktu" required aria-required="true">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="catatan">Catatan Tambahan:</label>
+          <textarea id="catatan" name="catatan" rows="4" aria-label="Catatan tambahan untuk pesanan"></textarea>
+        </div>
+
+        <button type="submit" class="ripple-btn" id="submitBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+               viewBox="0 0 24 24" class="icon" aria-hidden="true">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v16l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+          </svg>
+          <span id="btnText">Kirim Pesanan via WhatsApp</span>
+          <span id="btnLoading" class="loading" hidden>Memproses...</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script untuk form -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set selected design from URL
+      const params = new URLSearchParams(window.location.search);
+      const desainDipilih = params.get('desain');
+      if (desainDipilih) {
+        const selectElement = document.getElementById('desain');
+        const optionExists = Array.from(selectElement.options).some(
+          opt => opt.value === desainDipilih
+        );
+        
+        if (optionExists) {
+          selectElement.value = desainDipilih;
+        }
+      }
+
+      // Setup date inputs
+      const inputTanggal = document.getElementById('tanggal');
+      const inputWaktu = document.getElementById('waktu');
+
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+      
+      inputTanggal.min = todayStr;
+
+      inputTanggal.addEventListener('change', function() {
+        if (this.value === todayStr) {
+          const now = new Date();
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          inputWaktu.min = `${hours}:${minutes}`;
+        } else {
+          inputWaktu.min = '00:00';
+        }
+      });
+
+      // Form submission
+      const form = document.getElementById('formPemesanan');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnLoading = document.getElementById('btnLoading');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+          nama: document.getElementById('nama').value.trim(),
+          nomor: document.getElementById('nomor').value.trim(),
+          desain: document.getElementById('desain').value,
+          catatan: document.getElementById('catatan').value.trim(),
+          tanggal: document.getElementById('tanggal').value,
+          waktu: document.getElementById('waktu').value
+        };
+
+        // Validate
+        if (!validateForm(formData)) {
+          return;
+        }
+
+        // Show loading
+        submitBtn.disabled = true;
+        btnText.hidden = true;
+        btnLoading.hidden = false;
+
+        // Simulate processing
+        setTimeout(() => {
+          sendToWhatsApp(formData);
+          // Reset loading state
+          submitBtn.disabled = false;
+          btnText.hidden = false;
+          btnLoading.hidden = true;
+        }, 1000);
+      });
+
+      function validateForm(data) {
+        // Validate phone number
+        if (!/^08\d{9,13}$/.test(data.nomor)) {
+          alert('Nomor WhatsApp harus dimulai dengan 08 dan panjang 10-14 digit');
+          return false;
+        }
+
+        // Validate date
+        const selectedDate = new Date(data.tanggal);
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        if (selectedDate < today) {
+          alert('Tanggal booking tidak boleh hari kemarin');
+          return false;
+        }
+
+        return true;
+      }
+
+      function sendToWhatsApp(data) {
+        const nomorToko = '62895806488823';
+        
+        // Format message
+        const pesan = `*Halooo! Ada pesanan nail art* :
+*Nama*: ${escapeInput(data.nama)}
+*Nomor Whatsapp*: ${escapeInput(data.nomor)}
+*Desain*: ${escapeInput(data.desain)}
+*Tanggal Booking*: ${escapeInput(data.tanggal)}
+*Waktu Booking*: ${escapeInput(data.waktu)}
+*Catatan*: ${data.catatan ? escapeInput(data.catatan) : "-"}
+
+Terima kasih!! 🥰 ❤ Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda 🤩😁
+
+*NOTE:*
+Jika admin belum membalas cepat, mungkin sedang melayani customer lain, atau sedang bobok manis 😴. Tapi tenang, pesanmu tetap kami utamakan 🥇`;
+
+        const encodedPesan = encodeURIComponent(pesan);
+        const urlWA = `https://wa.me/${nomorToko}?text=${encodedPesan}`;
+        
+        // Open WhatsApp in a new tab
+        window.open(urlWA, '_blank');
+      }
+
+      function escapeInput(str) {
+        return str.replace(/[*_~`]/g, '\\$&');
+      }
+
+      // Ripple Effect for form buttons
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.ripple-btn')) {
+          const button = e.target.closest('.ripple-btn');
+          const circle = document.createElement('span');
+          circle.classList.add('ripple-circle');
+          const rect = button.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          circle.style.width = circle.style.height = `${size}px`;
+          circle.style.left = `${e.clientX - rect.left - size / 2}px`;
+          circle.style.top = `${e.clientY - rect.top - size / 2}px`;
+          button.appendChild(circle);
+          setTimeout(() => circle.remove(), 600);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
