@@ -4,502 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Design Nail Art</title>
-  <style>
-    /* === VARIABLES === */
-    :root {
-      --primary: #db7093;
-      --primary-dark: #c06080;
-      --primary-darker: #a05070;
-      --accent: #c71585;
-      --accent-light: #e83e8c;
-      --light-bg: #fff0f5;
-      --light-bg-secondary: #ffe4ec;
-      --text-dark: #333;
-      --text-light: #555;
-      --text-on-primary: white;
-      --border-color: #ddd;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-      --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.2);
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 16px;
-      --transition: all 0.3s ease;
-    }
-
-    /* === BASE STYLES === */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    h1, h2, h3 {
-      color: var(--accent);
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    /* === LAYOUT === */
-    .wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .container {
-      padding: 1.25rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    /* === HEADER === */
-    .main-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-      background-color: white;
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .logo img {
-      height: 40px;
-    }
-
-    .search-bar input {
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 1.25rem;
-      width: 10rem;
-      transition: var(--transition);
-    }
-
-    .search-bar input:focus {
-      width: 13.75rem;
-      outline: 2px solid var(--primary);
-      box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.3);
-    }
-
-    /* === BANNER === */
-    .hero-banner {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-    }
-
-    .banner-img {
-      width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* === KATEGORI FILTER === */
-    .kategori-filter {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 1.5rem auto;
-      flex-wrap: wrap;
-      padding: 0 1rem;
-    }
-
-    .kategori-filter button {
-      background-color: var(--primary);
-      color: var(--text-on-primary);
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 1.25rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 600;
-    }
-
-    .kategori-filter button:hover, 
-    .kategori-filter button:focus {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .kategori-filter button.active {
-      background-color: var(--primary-darker);
-    }
-
-    /* === PRODUCT LIST === */
-    .product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 1rem 0;
-    }
-
-    .product {
-      display: flex;
-      flex-direction: column;
-      background-color: white;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .product img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .product:hover img {
-      transform: scale(1.03);
-    }
-
-    .product-info {
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .product-info h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .product-info p {
-      margin: 0 0 1rem;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      flex-grow: 1;
-    }
-
-    .price {
-      font-weight: bold;
-      margin: 0.5rem 0;
-      font-size: 1.1rem;
-    }
-
-    .harga-asli {
-      text-decoration: line-through;
-      color: var(--text-light);
-      margin-right: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .harga-diskon {
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    .pesan-wrapper {
-      margin-top: auto;
-      padding: 1rem;
-      padding-top: 0;
-    }
-
-    .pesan-wrapper a {
-      text-decoration: none;
-      display: block;
-    }
-
-    /* === BUTTON === */
-    .ripple-btn {
-      position: relative;
-      overflow: hidden;
-      background-color: var(--primary);
-      color: var(--text-on-primary);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      transition: var(--transition);
-      width: 100%;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    .ripple-btn:hover,
-    .ripple-btn:focus-visible {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .ripple-btn:active {
-      transform: translateY(0);
-    }
-
-    .ripple-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.6);
-      transform: scale(0);
-      animation: ripple-animation 0.6s linear;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-
-    .icon {
-      transition: transform 0.3s ease;
-    }
-
-    .ripple-btn:hover .icon,
-    .ripple-btn:focus-visible .icon {
-      transform: rotate(-10deg) scale(1.2);
-    }
-
-    /* === FOOTER === */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background-color: white;
-      margin-top: auto;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-light);
-      font-size: 0.9rem;
-    }
-
-    /* === FORM PAGE === */
-    .form-header {
-      background: linear-gradient(135deg, var(--light-bg-secondary) 0%, #ffcce0 100%);
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      position: relative;
-      margin-bottom: 2rem;
-    }
-
-    .form-header-text {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .form-header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    .form-header p {
-      margin: 0.5rem 0 0;
-      color: var(--text-light);
-      font-size: 1.1rem;
-    }
-
-    .btn-kembali {
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      background: var(--primary);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn-kembali:hover {
-      background: var(--primary-dark);
-      transform: translateX(-3px);
-    }
-
-    .btn-kembali:active {
-      transform: translateX(0);
-    }
-
-    form {
-      background-color: white;
-      padding: 2rem;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      max-width: 600px;
-      margin: 0 auto 3rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      display: block;
-      color: var(--accent);
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--primary);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.3);
-    }
-
-    .form-row {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .form-row .form-group {
-      flex: 1;
-      margin-bottom: 0;
-    }
-
-    .hint {
-      color: var(--text-light);
-      font-size: 0.8rem;
-      display: block;
-      margin-top: 0.3rem;
-    }
-
-    /* Loading state */
-    .loading {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .loading::after {
-      content: "";
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* === RESPONSIVE === */
-    @media (max-width: 768px) {
-      .kategori-filter {
-        display: none;
-      }
-
-      .main-header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-      }
-
-      .search-bar input {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .search-bar input:focus {
-        width: 100%;
-      }
-
-      .form-row {
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .form-row .form-group {
-        margin-bottom: 1.5rem;
-      }
-
-      .form-header {
-        padding: 2rem 1rem;
-      }
-
-      .form-header h1 {
-        font-size: 1.5rem;
-      }
-
-      form {
-        padding: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .product-list {
-        grid-template-columns: 1fr;
-      }
-
-      .btn-kembali {
-        top: 1rem;
-        left: 1rem;
-        width: 35px;
-        height: 35px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="wrapper">
     <!-- Header -->
     <header class="main-header">
       <div class="logo">
-        <img src="logo.jpg" alt="Logo Toko">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIGZpbGw9IiNkYjcwOTMiIHJ4PSI1Ii8+PHRleHQgeD0iNjAiIHk9IjI1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5OYWlsIEFydCBTdHVkaW88L3RleHQ+PC9zdmc+" alt="Logo Toko">
       </div>
       <div class="search-bar">
         <input type="text" placeholder="Cari desain..." id="searchInput">
@@ -508,12 +20,11 @@
 
     <!-- Banner -->
     <section class="hero-banner">
-      <img src="banner.png" alt="Promo Nail Art" class="banner-img">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjZmZlZGVkZSIvPjx0ZXh0IHg9IjYwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IiNjNzE1ODUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5haWwgQXJ0IFByb21vISBVcCB0byA1MCUgT2ZmITwvdGV4dD48L3N2Zz4=" alt="Promo Nail Art" class="banner-img">
     </section>
 
     <!-- Filter Kategori (hanya di desktop) -->
     <div class="kategori-filter">
-      <button data-filter="imut">Cute</button>
       <button data-filter="elegan">Elegan</button>
       <button data-filter="semua" class="active">Semua</button>
       <button data-filter="feminin">Feminin</button>
@@ -525,7 +36,7 @@
       <div class="product-list" id="produk">
         <!-- Produk 1 -->
         <div class="product" data-nama="Floral and Sea" data-kategori="feminin promo">
-          <img src="flower.jpg" alt="Floral and Sea">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZjBlZmYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMDAiIHI9IjYwIiBmaWxsPSIjZjY4Y2M0Ii8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iNjAiIHI9IjMwIiBmaWxsPSIjZmY2YjhiIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iNjAiIHI9IjMwIiBmaWxsPSIjZmY2YjhiIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMTQwIiByPSIzMCIgZmlsbD0iIzM2YThmZiIvPjx0ZXh0IHg9IjE0MCIgeT0iMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RmxvcmFsIGFuZCBTZWE8L3RleHQ+PC9zdmc+" alt="Floral and Sea">
           <div class="product-info">
             <h3>Floral and Sea</h3>
             <p>Motif bunga yang lembut dan feminim disertai design pink laut yang cocok untuk acara spesial!!</p>
@@ -548,7 +59,7 @@
 
         <!-- Produk 2 -->
         <div class="product" data-nama="Silver and Black" data-kategori="elegan">
-          <img src="silvernblack.jpg" alt="Silver and Black Nail Art">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y1ZjVmNSIvPjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNlZWVlZWUiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMDAiIHI9IjQwIiBmaWxsPSIjMzMzIi8+PHJlY3QgeD0iMTIwIiB5PSI2MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iMTQwIiB5PSIyMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSIjMzMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TaWx2ZXIgYW5kIEJsYWNrPC90ZXh0Pjwvc3ZnPg==" alt="Silver and Black Nail Art">
           <div class="product-info">
             <h3>Silver and Black</h3>
             <p>Design simple dan elegan untuk keseharian!!</p>
@@ -567,18 +78,18 @@
         </div>
 
         <!-- Produk 3 -->
-        <div class="product" data-nama="Coquette and Grey & Blue Cat Eye" data-kategori="Coquette and Grey & Blue Cat Eye promo">
-          <img src="coquette.jpg" alt="Coquette and Grey & Blue Cat Eye">
+        <div class="product" data-nama="Golden Glitter" data-kategori="elegan promo">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZjBlZmYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMDAiIHI9IjYwIiBmaWxsPSIjZmZlYzYwIi8+PHBhdGggZD0iTTE0MCA0MGwzMCA2MGgtNjB6IiBmaWxsPSIjZmZjYzMzIi8+PHBhdGggZD0iTTEwMCAxNDBsNDAtNDAgNDAgNDB6IiBmaWxsPSIjZmZjYzMzIi8+PHRleHQgeD0iMTQwIiB5PSIyMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSIjMzMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Hb2xkZW4gR2xpdHRlcjwvdGV4dD48L3N2Zz4=" alt="Golden Glitter">
           <div class="product-info">
-            <h3>Coquette and Grey & Blue Cat Eye</h3>
-            <p>Desain glamor dengan glitter emas untuk penampilan yang lebih mencolok!</p>
+            <h3>Golden Glitter</h3>
+            <p>Desain glamor dengan glitter emas untuk penampilan yang mencolok!</p>
             <div class="price">
               <span class="harga-asli">Rp 35.000</span>
               <span class="harga-diskon">Rp 28.000</span>
             </div>
           </div>
           <div class="pesan-wrapper">
-            <a href="form.html?desain=Coquette and Grey & Blue Cat Eye">
+            <a href="form.html?desain=Golden Glitter">
               <button type="button" class="ripple-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" class="icon">
                   <path d="M14 2H10v4h4V2zm1 6H9c-1.1 0-2 .9-2 2v12h10V10c0-1.1-.9-2-2-2zM9 22V10h6v12H9z"/>
@@ -590,15 +101,15 @@
         </div>
 
         <!-- Produk 4 -->
-        <div class="product" data-nama="Bear and Red Cherry" data-kategori="imut">
-          <img src="bearnred.jpg" alt="Pastel Dream">
+        <div class="product" data-nama="Pastel Dream" data-kategori="feminin">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZjBlZmYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMDAiIHI9IjYwIiBmaWxsPSIjZmZjY2ZmIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iNjAiIHI9IjIwIiBmaWxsPSIjY2NmZmZmIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iNjAiIHI9IjIwIiBmaWxsPSIjZmZjY2ZmIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMTQwIiByPSIyMCIgZmlsbD0iI2ZmY2NmZiIvPjx0ZXh0IHg9IjE0MCIgeT0iMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UGFzdGVsIERyZWFtPC90ZXh0Pjwvc3ZnPg==" alt="Pastel Dream">
           <div class="product-info">
-            <h3>Bear and Red Cherry</h3>
-            <p>Mix and match warna merah & putih yang cantik dan lucu!</p>
+            <h3>Pastel Dream</h3>
+            <p>Warna pastel yang lembut dengan kombinasi dreamy untuk tampilan feminin.</p>
             <div class="price">Rp 22.000</div>
           </div>
           <div class="pesan-wrapper">
-            <a href="form.html?desain=Bear and Red Cherry">
+            <a href="form.html?desain=Pastel Dream">
               <button type="button" class="ripple-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" class="icon">
                   <path d="M14 2H10v4h4V2zm1 6H9c-1.1 0-2 .9-2 2v12h10V10c0-1.1-.9-2-2-2zM9 22V10h6v12H9z"/>
@@ -617,55 +128,6 @@
     </footer>
   </div>
 
-  <!-- JS: Pencarian, Kategori Filter, dan Ripple Effect -->
-  <script>
-    // Ripple Effect
-    document.addEventListener('click', function(e) {
-      if (e.target.closest('.ripple-btn')) {
-        const button = e.target.closest('.ripple-btn');
-        const circle = document.createElement('span');
-        circle.classList.add('ripple-circle');
-        const rect = button.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        circle.style.width = circle.style.height = `${size}px`;
-        circle.style.left = `${e.clientX - rect.left - size / 2}px`;
-        circle.style.top = `${e.clientY - rect.top - size / 2}px`;
-        button.appendChild(circle);
-        setTimeout(() => circle.remove(), 600);
-      }
-    });
-
-    // Pencarian
-    const inputSearch = document.getElementById('searchInput');
-    const produkList = document.querySelectorAll('.product');
-
-    if (inputSearch) {
-      inputSearch.addEventListener('input', () => {
-        const query = inputSearch.value.toLowerCase();
-        produkList.forEach(produk => {
-          const nama = produk.getAttribute('data-nama').toLowerCase();
-          produk.style.display = nama.includes(query) ? 'flex' : 'none';
-        });
-      });
-    }
-
-    // Filter kategori
-    const tombolKategori = document.querySelectorAll('.kategori-filter button');
-    if (tombolKategori.length > 0) {
-      tombolKategori.forEach(button => {
-        button.addEventListener('click', () => {
-          const kategoriDipilih = button.getAttribute('data-filter');
-          produkList.forEach(produk => {
-            const kategoriProduk = produk.getAttribute('data-kategori').toLowerCase();
-            produk.style.display = kategoriDipilih === 'semua' || kategoriProduk.includes(kategoriDipilih) ? 'flex' : 'none';
-          });
-
-          // Highlight tombol aktif
-          tombolKategori.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-        });
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
