@@ -161,6 +161,7 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 1rem 0;
+  width: 100%;
 }
 
 .product {
@@ -477,6 +478,7 @@ form {
 @media (max-width: 480px) {
   .product-list {
     grid-template-columns: 1fr;
+    padding: 1rem;
   }
 
   .btn-kembali {
@@ -484,5 +486,10 @@ form {
     left: 1rem;
     width: 35px;
     height: 35px;
+  }
+
+  .product-info p {
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
 } 
