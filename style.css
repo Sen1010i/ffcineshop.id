@@ -1,23 +1,30 @@
 /* === VARIABLES === */
 :root {
-  --primary: #db7093;
-  --primary-dark: #c06080;
-  --primary-darker: #a05070;
-  --accent: #c71585;
-  --accent-light: #e83e8c;
-  --light-bg: #fff0f5;
-  --light-bg-secondary: #ffe4ec;
-  --text-dark: #333;
-  --text-light: #555;
-  --text-on-primary: white;
-  --border-color: #ddd;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.2);
-  --radius-sm: 6px;
-  --radius-md: 10px;
+  /* Color Palette */
+  --primary: #db7093;       /* Soft pink */
+  --primary-dark: #c06080;  /* Darker pink */
+  --primary-darker: #a05070; /* Even darker pink */
+  --accent: #c71585;        /* Vibrant pink */
+  --accent-light: #e83e8c;  /* Lighter accent */
+  --light-bg: #fff0f5;      /* Very light pink background */
+  --light-bg-secondary: #ffe4ec; /* Secondary light pink */
+  --text-dark: #333;        /* Dark gray for text */
+  --text-light: #555;       /* Light gray for secondary text */
+  --text-on-primary: white; /* White text on colored backgrounds */
+  --border-color: #e0c8d1;  /* Soft pink border */
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.15);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
   --radius-lg: 16px;
-  --transition: all 0.3s ease;
+  
+  /* Transitions */
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* === BASE STYLES === */
@@ -27,12 +34,18 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--light-bg);
   color: var(--text-dark);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -43,21 +56,27 @@ body {
 
 h1, h2, h3 {
   color: var(--accent);
+  line-height: 1.3;
+  font-weight: 600;
 }
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  transition: var(--transition);
 }
 
 button {
   cursor: pointer;
   font-family: inherit;
+  border: none;
+  background: none;
 }
 
 /* === LAYOUT === */
@@ -68,8 +87,8 @@ button {
 }
 
 .container {
-  padding: 1.25rem;
-  max-width: 1200px;
+  padding: 1.5rem;
+  max-width: 1280px;
   margin: 0 auto;
   width: 100%;
 }
@@ -79,55 +98,80 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
   background-color: white;
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   box-shadow: var(--shadow-sm);
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+}
+
 .logo img {
-  height: 40px;
+  height: 42px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+  transform: scale(1.05);
+}
+
+.search-bar {
+  position: relative;
 }
 
 .search-bar input {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem 0.6rem 2.5rem;
   border: 1px solid var(--border-color);
-  border-radius: 1.25rem;
-  width: 10rem;
+  border-radius: 2rem;
+  width: 180px;
   transition: var(--transition);
+  font-size: 0.95rem;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23db7093" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>') no-repeat 1rem center;
 }
 
 .search-bar input:focus {
-  width: 13.75rem;
-  outline: 2px solid var(--primary);
-  box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.3);
+  width: 240px;
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.2);
 }
 
 /* === BANNER === */
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 100%;
   overflow: hidden;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 3 / 1;
 }
 
 .banner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+.hero-banner:hover .banner-img {
+  transform: scale(1.02);
 }
 
 /* === KATEGORI FILTER === */
 .kategori-filter {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin: 1.5rem auto;
+  gap: 0.75rem;
+  margin: 2rem auto;
   flex-wrap: wrap;
   padding: 0 1rem;
 }
@@ -136,12 +180,13 @@ button {
   background-color: var(--primary);
   color: var(--text-on-primary);
   border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 1.25rem;
-  font-size: 0.9rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 2rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: var(--transition);
   font-weight: 600;
+  box-shadow: var(--shadow-sm);
 }
 
 .kategori-filter button:hover, 
@@ -153,13 +198,14 @@ button {
 
 .kategori-filter button.active {
   background-color: var(--primary-darker);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) inset;
 }
 
 /* === PRODUCT LIST === */
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.75rem;
   padding: 1rem 0;
 }
 
@@ -171,70 +217,92 @@ button {
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
+  position: relative;
 }
 
 .product:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
 }
 
 .product img {
   width: 100%;
-  height: 200px;
+  height: 240px;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.5s ease;
 }
 
 .product:hover img {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
 .product-info {
-  padding: 1rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .product-info h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.2rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  color: var(--accent);
 }
 
 .product-info p {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
   color: var(--text-light);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   flex-grow: 1;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .price {
   font-weight: bold;
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
+  margin: 0.75rem 0;
+  font-size: 1.15rem;
 }
 
 .harga-asli {
   text-decoration: line-through;
   color: var(--text-light);
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
   font-size: 0.9rem;
 }
 
 .harga-diskon {
   color: var(--accent);
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .pesan-wrapper {
   margin-top: auto;
-  padding: 1rem;
-  padding-top: 0;
+  padding: 0 1.25rem 1.25rem;
 }
 
 .pesan-wrapper a {
   text-decoration: none;
   display: block;
+}
+
+/* Promo Badge */
+.label-promo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--accent);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 1;
+  box-shadow: var(--shadow-sm);
 }
 
 /* === BUTTON === */
@@ -244,18 +312,19 @@ button {
   background-color: var(--primary);
   color: var(--text-on-primary);
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.75rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   transition: var(--transition);
   width: 100%;
   font-weight: 600;
   text-align: center;
+  box-shadow: var(--shadow-sm);
 }
 
 .ripple-btn:hover,
@@ -267,6 +336,7 @@ button {
 
 .ripple-btn:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .ripple-circle {
@@ -291,52 +361,58 @@ button {
 
 .ripple-btn:hover .icon,
 .ripple-btn:focus-visible .icon {
-  transform: rotate(-10deg) scale(1.2);
+  transform: rotate(-10deg) scale(1.15);
 }
 
 /* === FOOTER === */
 footer {
   text-align: center;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: white;
-  margin-top: auto;
+  margin-top: 3rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-light);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+}
+
+footer p {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* === FORM PAGE === */
 .form-header {
   background: linear-gradient(135deg, var(--light-bg-secondary) 0%, #ffcce0 100%);
-  padding: 2.5rem 1.5rem;
+  padding: 3rem 2rem;
   text-align: center;
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .form-header-text {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .form-header h1 {
-  margin: 0;
-  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  font-size: 2.25rem;
 }
 
 .form-header p {
-  margin: 0.5rem 0 0;
+  margin: 0;
   color: var(--text-light);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
 }
 
 .btn-kembali {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: 1.75rem;
+  left: 2rem;
   background: var(--primary);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -347,7 +423,8 @@ footer {
 
 .btn-kembali:hover {
   background: var(--primary-dark);
-  transform: translateX(-3px);
+  transform: translateX(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-kembali:active {
@@ -356,29 +433,30 @@ footer {
 
 form {
   background-color: white;
-  padding: 2rem;
-  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  max-width: 600px;
-  margin: 0 auto 3rem;
+  max-width: 650px;
+  margin: 0 auto 4rem;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .form-group label {
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   display: block;
   color: var(--accent);
+  font-size: 1.05rem;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.9rem 1.25rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-size: 1rem;
@@ -390,12 +468,12 @@ form {
 .form-group textarea:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.3);
+  box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.2);
 }
 
 .form-row {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .form-row .form-group {
@@ -405,26 +483,27 @@ form {
 
 .hint {
   color: var(--text-light);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   display: block;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
+  line-height: 1.5;
 }
 
 /* Loading state */
 .loading {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .loading::after {
   content: "";
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.3);
   border-top-color: white;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -432,6 +511,17 @@ form {
 }
 
 /* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .hero-banner {
+    aspect-ratio: 2 / 1;
+  }
+  
+  .product-list {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .kategori-filter {
     display: none;
@@ -439,8 +529,8 @@ form {
 
   .main-header {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 1.25rem;
+    padding: 1.25rem;
   }
 
   .search-bar input {
@@ -452,37 +542,62 @@ form {
     width: 100%;
   }
 
+  .hero-banner {
+    aspect-ratio: 3 / 2;
+    margin-bottom: 1.5rem;
+    border-radius: 0;
+  }
+
   .form-row {
     flex-direction: column;
     gap: 0;
   }
 
   .form-row .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
 
   .form-header {
-    padding: 2rem 1rem;
+    padding: 2.5rem 1.5rem;
   }
 
   .form-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   form {
-    padding: 1.5rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .btn-kembali {
+    top: 1.5rem;
+    left: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .product-list {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .product img {
+    height: 200px;
   }
 
   .btn-kembali {
-    top: 1rem;
-    left: 1rem;
-    width: 35px;
-    height: 35px;
+    top: 1.25rem;
+    left: 1.25rem;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .hero-banner {
+    aspect-ratio: 1 / 1;
+  }
+  
+  footer {
+    padding: 1.5rem;
   }
 }
