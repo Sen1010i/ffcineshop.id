@@ -148,32 +148,26 @@ if (document.getElementById('formPemesanan')) {
     }
 
     function sendToWhatsApp(data) {
-      const nomorToko = '6281268556553';
+      // Nomor harus format internasional: 628xx (bukan 088)
+        const nomorToko = '6281268556553';
+        const pesan = `*Halooo! Ada pesanan nail art* :
+        *Nama* : ${escapeInput(data.nama)}
+        *Nomor Whatsapp* : ${escapeInput(data.nomor)}
+        *Desain* : ${escapeInput(data.desain)}
+        *Tanggal Booking* : ${escapeInput(data.tanggal)}
+        *Waktu Booking* : ${escapeInput(data.waktu)}
+        *Catatan* : ${data.catatan ? escapeInput(data.catatan) : "-"}
 
-    // ... di awal submit:
-    if (btnLoading) btnLoading.hidden = false;
+        Terima kasih!! 🥰 ❤ Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda 🤩😁
 
-    // ... setelah selesai:
-    if (btnLoading) btnLoading.hidden = true;
-      
-      // Format message
-      const pesan = `*Halooo! Ada pesanan nail art* :
-*Nama* : ${escapeInput(data.nama)}
-*Nomor Whatsapp* : ${escapeInput(data.nomor)}
-*Desain* : ${escapeInput(data.desain)}
-*Tanggal Booking* : ${escapeInput(data.tanggal)}
-*Waktu Booking* : ${escapeInput(data.waktu)}
-*Catatan* : ${data.catatan ? escapeInput(data.catatan) : "-"}
+        *NOTE:*
+        Jika admin belum membalas cepat, mungkin sedang melayani customer lain, atau sedang bobok manis 😴. Tapi tenang, pesanmu tetap kami utamakan 🥇`;
 
-Terima kasih!! 🥰 ❤ Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda 🤩😁
-
-*NOTE:*
-Jika admin belum membalas cepat, mungkin sedang melayani customer lain, atau sedang bobok manis 😴. Tapi tenang, pesanmu tetap kami utamakan 🥇`;
-
-      const encodedPesan = encodeURIComponent(pesan);
-      window.open(`https://wa.me/${nomorToko}?text=${encodeURIComponent(pesan)}`, '_blank');
-      
+        const encodedPesan = encodeURIComponent(pesan);
+        const urlWA = `https://wa.me/${nomorToko}?text=${encodedPesan}`;
+        window.open(urlWA, '_blank');
     }
+
 
     function escapeInput(str) {
       return str.replace(/[*_~`]/g, '\\$&');
