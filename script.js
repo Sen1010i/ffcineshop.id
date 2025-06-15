@@ -113,29 +113,29 @@ if (document.getElementById('formPemesanan')) {
       }
 
       // Show loading
+      if (btnText)    btnText.hidden = true;
+      if (btnLoading) btnLoading.hidden = false;
       submitBtn.disabled = true;
-      btnText.hidden = true;
-      btnLoading.hidden = false;
 
       // Simulate processing
       setTimeout(() => {
         sendToWhatsApp(formData);
         // Reset loading state
         submitBtn.disabled = false;
-        btnText.hidden = false;
-        btnLoading.hidden = true;
-      }, 1000);
+        if (btnText)    btnText.hidden = false;
+        if (btnLoading) btnLoading.hidden = true;
+      }, 500);
     });
 
-    function validateForm(data) {
+    function validateForm(formData) {
       // Validate phone number
-      if (!/^08\d{9,13}$/.test(data.nomor)) {
+      if (!/^08\d{9,13}$/.test(formData.nomor)) {
         alert('Nomor WhatsApp harus dimulai dengan 08 dan panjang 10-14 digit');
         return false;
       }
 
       // Validate date
-      const selectedDate = new Date(data.tanggal);
+      const selectedDate = new Date(formData.tanggal);
       const today = new Date();
       today.setHours(0,0,0,0);
 
@@ -147,16 +147,16 @@ if (document.getElementById('formPemesanan')) {
       return true;
     }
 
-    function sendToWhatsApp(data) {
+    function sendToWhatsApp(formData) {
       // Nomor harus format internasional: 628xx (bukan 088)
         const nomorToko = '6281268556553';
         const pesan = `*Halooo! Ada pesanan nail art* :
-        *Nama* : ${escapeInput(data.nama)}
-        *Nomor Whatsapp* : ${escapeInput(data.nomor)}
-        *Desain* : ${escapeInput(data.desain)}
-        *Tanggal Booking* : ${escapeInput(data.tanggal)}
-        *Waktu Booking* : ${escapeInput(data.waktu)}
-        *Catatan* : ${data.catatan ? escapeInput(data.catatan) : "-"}
+        *Nama* : ${escapeInput(formData.nama)}
+        *Nomor Whatsapp* : ${escapeInput(formData.nomor)}
+        *Desain* : ${escapeInput(formData.desain)}
+        *Tanggal Booking* : ${escapeInput(formData.tanggal)}
+        *Waktu Booking* : ${escapeInput(formData.waktu)}
+        *Catatan* : ${formData.catatan ? escapeInput(formData.catatan) : "-"}
 
         Terima kasih!! 🥰 ❤ Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda 🤩😁
 
