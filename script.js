@@ -151,20 +151,20 @@ if (document.getElementById('formPemesanan')) {
       // Nomor harus format internasional: 628xx (bukan 088)
         const nomorToko = '6281268556553';
         const pesan = `*Halooo! Ada pesanan nail art* :
-        *Nama* : ${escapeInput(formData.nama)}
-        *Nomor Whatsapp* : ${escapeInput(formData.nomor)}
-        *Desain* : ${escapeInput(formData.desain)}
-        *Tanggal Booking* : ${escapeInput(formData.tanggal)}
-        *Waktu Booking* : ${escapeInput(formData.waktu)}
-        *Catatan* : ${formData.catatan ? escapeInput(formData.catatan) : "-"}
+*Nama* : ${escapeInput(formData.nama)}
+*Nomor Whatsapp* : ${escapeInput(formData.nomor)}
+*Desain* : ${escapeInput(formData.desain)}
+*Tanggal Booking* : ${escapeInput(formData.tanggal)}
+*Waktu Booking* : ${escapeInput(formData.waktu)}
+*Catatan* : ${formData.catatan ? escapeInput(formData.catatan) : "-"}
 
-        Terima kasih!! Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda!
+Terima kasih!! Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda!
 
-        *NOTE:*
-        Jika admin belum membalas pesan anda, mungkin sedang melayani customer, atau sedang bobok manis. 
-        Tapi tenang, pesanmu tetap kami utamakan!
-        
-        Thank you!!!`;
+*NOTE:*
+Jika admin belum membalas pesan anda, mungkin sedang melayani customer, atau sedang bobok manis. 
+Tapi tenang, pesanmu tetap kami utamakan!
+
+Thank you!!!`;
 
         const encodedPesan = encodeURIComponent(pesan);
         const urlWA = `https://wa.me/${nomorToko}?text=${encodedPesan}`;
