@@ -171,10 +171,8 @@ Terima kasih!! 🥰 ❤ Sudah melakukan order! Ditunggu ya, admin akan segera me
 Jika admin belum membalas cepat, mungkin sedang melayani customer lain, atau sedang bobok manis 😴. Tapi tenang, pesanmu tetap kami utamakan 🥇`;
 
       const encodedPesan = encodeURIComponent(pesan);
-      const urlWA = `https://wa.me/${nomorToko}?text=${encodedPesan}`;
+      window.open(`https://wa.me/${nomorToko}?text=${encodeURIComponent(pesan)}`, '_blank');
       
-      // Open WhatsApp in a new tab
-      window.open(urlWA, '_blank');
     }
 
     function escapeInput(str) {
