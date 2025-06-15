@@ -148,7 +148,13 @@ if (document.getElementById('formPemesanan')) {
     }
 
     function sendToWhatsApp(data) {
-      const nomorToko = '0881268556553';
+      const nomorToko = '62881268556553';
+
+    // ... di awal submit:
+    if (btnLoading) btnLoading.hidden = false;
+
+    // ... setelah selesai:
+    if (btnLoading) btnLoading.hidden = true;
       
       // Format message
       const pesan = `*Halooo! Ada pesanan nail art* :
