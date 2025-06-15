@@ -158,10 +158,13 @@ if (document.getElementById('formPemesanan')) {
         *Waktu Booking* : ${escapeInput(formData.waktu)}
         *Catatan* : ${formData.catatan ? escapeInput(formData.catatan) : "-"}
 
-        Terima kasih!! 🥰 ❤ Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda 🤩😁
+        Terima kasih!! Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda!
 
         *NOTE:*
-        Jika admin belum membalas cepat, mungkin sedang melayani customer lain, atau sedang bobok manis 😴. Tapi tenang, pesanmu tetap kami utamakan 🥇`;
+        Jika admin belum membalas pesan anda, mungkin sedang melayani customer, atau sedang bobok manis. 
+        Tapi tenang, pesanmu tetap kami utamakan!
+        
+        Thank you!!!`;
 
         const encodedPesan = encodeURIComponent(pesan);
         const urlWA = `https://wa.me/${nomorToko}?text=${encodedPesan}`;
