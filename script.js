@@ -148,7 +148,7 @@ if (document.getElementById('formPemesanan')) {
     }
 
     function sendToWhatsApp(data) {
-      const nomorToko = '62881268556553';
+      const nomorToko = '6281268556553';
 
     // ... di awal submit:
     if (btnLoading) btnLoading.hidden = false;
