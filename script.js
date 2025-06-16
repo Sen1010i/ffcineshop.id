@@ -175,34 +175,30 @@ Thank you!!!`;
     function escapeInput(str) {
       return str.replace(/[*_~`]/g, '\\$&');
     }
-  });
+    });
+  }
 
     // === SLIDER PRODUK ===
     document.addEventListener('DOMContentLoaded', () => {
       const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
+
       carousels.forEach(carousel => {
-      const imgs   = carousel.querySelectorAll('.carousel-img');
-      const prev   = carousel.querySelector('.prev');
-      const next   = carousel.querySelector('.next');
-      let idx = 0, timer;
+        const imgs  = carousel.querySelectorAll('.carousel-img');
+        const prev  = carousel.querySelector('.prev');
+        const next  = carousel.querySelector('.next');
+        let idx = 0, timer;
 
-      const show  = i => imgs.forEach((img,n)=>
-                      img.classList.toggle('active', n===i));
+        const show = i => imgs.forEach((img,n)=>img.classList.toggle('active', n===i));
+        const maju = () => { idx = (idx+1)%imgs.length; show(idx); };
+        const mundur = () => { idx = (idx-1+imgs.length)%imgs.length; show(idx); };
 
-      const nextFn = () => { idx = (idx+1)%imgs.length; show(idx); };
-      const prevFn = () => { idx = (idx-1+imgs.length)%imgs.length; show(idx); };
+        function mulai()  { timer = setInterval(maju, 4000); }
+        function reset()  { clearInterval(timer); mulai(); }
 
-      const start  = () => timer = setInterval(nextFn, 4000);
-      const reset  = () => { clearInterval(timer); start(); };
+        show(idx);
+        mulai();
 
-      if (next) next.addEventListener('click', () => { nextFn(); reset(); });
-      if (prev) prev.addEventListener('click', () => { prevFn(); reset(); });
-
-      show(idx);
-      start();
-     });
+        if (next) next.addEventListener('click', () => { maju();   reset(); });
+        if (prev) prev.addEventListener('click', () => { mundur(); reset(); });
+      });
     });
-
-
-
-}
