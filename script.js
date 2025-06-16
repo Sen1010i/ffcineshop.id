@@ -177,20 +177,57 @@ Thank you!!!`;
     }
   });
 
-  // ===== AUTO SLIDE CAROUSEL =====
-document.addEventListener('DOMContentLoaded', () => {
-  const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
+document.addEventListener("DOMContentLoaded", () => {
+  const carousels = document.querySelectorAll(".carousel[data-slide='true']");
 
   carousels.forEach(carousel => {
-    const images = carousel.querySelectorAll('.carousel-img');
+    const images = carousel.querySelectorAll(".carousel-img");
+    const prevBtn = carousel.querySelector(".prev");
+    const nextBtn = carousel.querySelector(".next");
     let index = 0;
+    let interval;
 
-    setInterval(() => {
-      images[index].classList.remove('active');
+    function showSlide(i) {
+      images.forEach(img => img.classList.remove("active"));
+      images[i].classList.add("active");
+    }
+
+    function nextSlide() {
       index = (index + 1) % images.length;
-      images[index].classList.add('active');
-    }, 3000); // Ganti slide setiap 3 detik
+      showSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + images.length) % images.length;
+      showSlide(index);
+    }
+
+    function startAutoSlide() {
+      interval = setInterval(nextSlide, 4000); // 4 detik
+    }
+
+    function stopAutoSlide() {
+      clearInterval(interval);
+    }
+
+    // Auto play
+    startAutoSlide();
+
+    // Manual navigation
+    if (nextBtn && prevBtn) {
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      });
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      });
+    }
   });
 });
+
 
 }
