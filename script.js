@@ -176,4 +176,21 @@ Thank you!!!`;
       return str.replace(/[*_~`]/g, '\\$&');
     }
   });
+
+  // ===== AUTO SLIDE CAROUSEL =====
+document.addEventListener('DOMContentLoaded', () => {
+  const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
+
+  carousels.forEach(carousel => {
+    const images = carousel.querySelectorAll('.carousel-img');
+    let index = 0;
+
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, 3000); // Ganti slide setiap 3 detik
+  });
+});
+
 }
