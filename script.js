@@ -183,25 +183,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
 
   carousels.forEach(carousel => {
-    const imgs  = carousel.querySelectorAll('.carousel-img');
-    const prev  = carousel.querySelector('.prev');
-    const next  = carousel.querySelector('.next');
-    let idx = 0, timer;
+    const imgs = carousel.querySelectorAll('.carousel-img');
+    const dotContainer = carousel.querySelector('.carousel-dots');
+    let index = 0;
+    let interval;
 
-    const show = i => imgs.forEach((img,n)=>img.classList.toggle('active', n===i));
-    const maju = () => { idx = (idx+1)%imgs.length; show(idx); };
-    const mundur = () => { idx = (idx-1+imgs.length)%imgs.length; show(idx); };
-    const reset = () => { clearInterval(timer); timer = setInterval(maju, 4000); };
+    // Buat dot
+    imgs.forEach((_, i) => {
+      const dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dotContainer.appendChild(dot);
+    });
+    const dots = dotContainer.querySelectorAll('span');
 
-    // auto slide
-    show(idx);
-    timer = setInterval(maju, 4000);
+    function showSlide(i) {
+      imgs.forEach((img, idx) => img.classList.toggle('active', idx === i));
+      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === i));
+    }
 
-    // tombol panah
-    if (next) next.addEventListener('click', () => { maju(); reset(); });
-    if (prev) prev.addEventListener('click', () => { mundur(); reset(); });
+    function nextSlide() {
+      index = (index + 1) % imgs.length;
+      showSlide(index);
+    }
 
-    // gesture swipe
+    function resetInterval() {
+      clearInterval(interval);
+      interval = setInterval(nextSlide, 4000);
+    }
+
+    // dot click
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        index = i;
+        showSlide(index);
+        resetInterval();
+      });
+    });
+
+    // Swipe support
     let startX = 0;
     carousel.addEventListener('touchstart', e => {
       startX = e.touches[0].clientX;
@@ -210,16 +229,19 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.addEventListener('touchend', e => {
       const endX = e.changedTouches[0].clientX;
       const diff = endX - startX;
-
       if (Math.abs(diff) > 50) {
         if (diff < 0) {
-          maju();   // swipe left
+          nextSlide();
         } else {
-          mundur(); // swipe right
+          index = (index - 1 + imgs.length) % imgs.length;
+          showSlide(index);
         }
-        reset();
+        resetInterval();
       }
     });
+
+    // Mulai auto slide
+    showSlide(index);
+    interval = setInterval(nextSlide, 4000);
   });
 });
-
