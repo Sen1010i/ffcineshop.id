@@ -242,6 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mulai auto slide
     showSlide(index);
-    interval = setInterval(nextSlide, 4000);
+    interval = setInterval(nextSlide, 6000);
   });
 });
