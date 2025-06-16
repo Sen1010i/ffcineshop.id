@@ -459,21 +459,30 @@ form {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   border: none;
   font-size: 1.5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.25rem 0.75rem;
   cursor: pointer;
   z-index: 2;
+  color: var(--accent);
   border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.carousel button.prev:hover,
+.carousel button.next:hover {
+  background: var(--primary-light);
 }
 
 .carousel button.prev {
   left: 10px;
 }
+
 .carousel button.next {
   right: 10px;
 }
+
 
 
 

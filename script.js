@@ -177,19 +177,21 @@ Thank you!!!`;
     }
   });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const carousels = document.querySelectorAll(".carousel[data-slide='true']");
+    // === SLIDER PRODUK ===
+document.addEventListener('DOMContentLoaded', () => {
+  const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
 
   carousels.forEach(carousel => {
-    const images = carousel.querySelectorAll(".carousel-img");
-    const prevBtn = carousel.querySelector(".prev");
-    const nextBtn = carousel.querySelector(".next");
+    const images = carousel.querySelectorAll('.carousel-img');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
     let index = 0;
     let interval;
 
     function showSlide(i) {
-      images.forEach(img => img.classList.remove("active"));
-      images[i].classList.add("active");
+      images.forEach((img, idx) => {
+        img.classList.toggle('active', idx === i);
+      });
     }
 
     function nextSlide() {
@@ -202,32 +204,32 @@ document.addEventListener("DOMContentLoaded", () => {
       showSlide(index);
     }
 
-    function startAutoSlide() {
-      interval = setInterval(nextSlide, 4000); // 4 detik
-    }
-
-    function stopAutoSlide() {
-      clearInterval(interval);
-    }
-
-    // Auto play
-    startAutoSlide();
-
-    // Manual navigation
     if (nextBtn && prevBtn) {
-      nextBtn.addEventListener("click", () => {
+      nextBtn.addEventListener('click', () => {
         nextSlide();
-        stopAutoSlide();
-        startAutoSlide();
+        resetInterval();
       });
-      prevBtn.addEventListener("click", () => {
+
+      prevBtn.addEventListener('click', () => {
         prevSlide();
-        stopAutoSlide();
-        startAutoSlide();
+        resetInterval();
       });
     }
+
+    function startAutoSlide() {
+      interval = setInterval(nextSlide, 4000); // ganti slide setiap 4 detik
+    }
+
+    function resetInterval() {
+      clearInterval(interval);
+      startAutoSlide();
+    }
+
+    showSlide(index);
+    startAutoSlide();
   });
 });
+
 
 
 }
