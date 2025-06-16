@@ -478,6 +478,7 @@ form {
   .product-list {
     grid-template-columns: 1fr;
   }
+}
 
   .btn-kembali {
     top: 1rem;
@@ -509,4 +510,3 @@ form {
   z-index: 1;
 }
 
-}
