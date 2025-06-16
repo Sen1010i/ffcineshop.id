@@ -178,27 +178,48 @@ Thank you!!!`;
     });
   }
 
-    // === SLIDER PRODUK ===
-    document.addEventListener('DOMContentLoaded', () => {
-      const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
+    // === SLIDER PRODUK + TOUCH SUPPORT ===
+document.addEventListener('DOMContentLoaded', () => {
+  const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
 
-      carousels.forEach(carousel => {
-        const imgs  = carousel.querySelectorAll('.carousel-img');
-        const prev  = carousel.querySelector('.prev');
-        const next  = carousel.querySelector('.next');
-        let idx = 0, timer;
+  carousels.forEach(carousel => {
+    const imgs  = carousel.querySelectorAll('.carousel-img');
+    const prev  = carousel.querySelector('.prev');
+    const next  = carousel.querySelector('.next');
+    let idx = 0, timer;
 
-        const show = i => imgs.forEach((img,n)=>img.classList.toggle('active', n===i));
-        const maju = () => { idx = (idx+1)%imgs.length; show(idx); };
-        const mundur = () => { idx = (idx-1+imgs.length)%imgs.length; show(idx); };
+    const show = i => imgs.forEach((img,n)=>img.classList.toggle('active', n===i));
+    const maju = () => { idx = (idx+1)%imgs.length; show(idx); };
+    const mundur = () => { idx = (idx-1+imgs.length)%imgs.length; show(idx); };
+    const reset = () => { clearInterval(timer); timer = setInterval(maju, 4000); };
 
-        function mulai()  { timer = setInterval(maju, 4000); }
-        function reset()  { clearInterval(timer); mulai(); }
+    // auto slide
+    show(idx);
+    timer = setInterval(maju, 4000);
 
-        show(idx);
-        mulai();
+    // tombol panah
+    if (next) next.addEventListener('click', () => { maju(); reset(); });
+    if (prev) prev.addEventListener('click', () => { mundur(); reset(); });
 
-        if (next) next.addEventListener('click', () => { maju();   reset(); });
-        if (prev) prev.addEventListener('click', () => { mundur(); reset(); });
-      });
+    // gesture swipe
+    let startX = 0;
+    carousel.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
     });
+
+    carousel.addEventListener('touchend', e => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff < 0) {
+          maju();   // swipe left
+        } else {
+          mundur(); // swipe right
+        }
+        reset();
+      }
+    });
+  });
+});
+
