@@ -178,57 +178,30 @@ Thank you!!!`;
   });
 
     // === SLIDER PRODUK ===
-document.addEventListener('DOMContentLoaded', () => {
-  const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousels = document.querySelectorAll('.carousel[data-slide="true"]');
+      carousels.forEach(carousel => {
+      const imgs   = carousel.querySelectorAll('.carousel-img');
+      const prev   = carousel.querySelector('.prev');
+      const next   = carousel.querySelector('.next');
+      let idx = 0, timer;
 
-  carousels.forEach(carousel => {
-    const images = carousel.querySelectorAll('.carousel-img');
-    const prevBtn = carousel.querySelector('.prev');
-    const nextBtn = carousel.querySelector('.next');
-    let index = 0;
-    let interval;
+      const show  = i => imgs.forEach((img,n)=>
+                      img.classList.toggle('active', n===i));
 
-    function showSlide(i) {
-      images.forEach((img, idx) => {
-        img.classList.toggle('active', idx === i);
-      });
-    }
+      const nextFn = () => { idx = (idx+1)%imgs.length; show(idx); };
+      const prevFn = () => { idx = (idx-1+imgs.length)%imgs.length; show(idx); };
 
-    function nextSlide() {
-      index = (index + 1) % images.length;
-      showSlide(index);
-    }
+      const start  = () => timer = setInterval(nextFn, 4000);
+      const reset  = () => { clearInterval(timer); start(); };
 
-    function prevSlide() {
-      index = (index - 1 + images.length) % images.length;
-      showSlide(index);
-    }
+      if (next) next.addEventListener('click', () => { nextFn(); reset(); });
+      if (prev) prev.addEventListener('click', () => { prevFn(); reset(); });
 
-    if (nextBtn && prevBtn) {
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetInterval();
-      });
-
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetInterval();
-      });
-    }
-
-    function startAutoSlide() {
-      interval = setInterval(nextSlide, 4000); // ganti slide setiap 4 detik
-    }
-
-    function resetInterval() {
-      clearInterval(interval);
-      startAutoSlide();
-    }
-
-    showSlide(index);
-    startAutoSlide();
-  });
-});
+      show(idx);
+      start();
+     });
+    });
 
 
 
