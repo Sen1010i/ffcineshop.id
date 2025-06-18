@@ -175,7 +175,11 @@ _Jika sudah melakukan pembayaran silahkan ditunggu konfirmasi ya_
 Jika admin belum membalas pesan anda, mungkin sedang melayani customer, atau sedang dalam kendala. 
 Tapi tenang, pesanmu tetap kami utamakan! 🤩
 
-Thank you!!! ✨🥰`;
+Thank you!!! ✨🥰
+
+Media Sosial admin : 
+@fcineshop.id
++6281268556553`;
 
         const encodedPesan = encodeURIComponent(pesan);
         const urlWA = `https://wa.me/${nomorToko}?text=${encodedPesan}`;
