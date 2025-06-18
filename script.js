@@ -166,10 +166,10 @@ Pembayaran tersebut hanya untuk *DEPOSIT* seharga Rp. 50.000!
 
 _Jika sudah melakukan pembayaran silahkan ditunggu konfirmasi ya_
 
-------------------------------------------
+-----------------------------------
 *BCA* : FRANJESSCA (0520473165)
 *Shoppe Pay* : FRANJESSCAFC (081268556553)
-------------------------------------------
+-----------------------------------
 
 *NOTE:*
 Jika admin belum membalas pesan anda, mungkin sedang melayani customer, atau sedang dalam kendala. 
