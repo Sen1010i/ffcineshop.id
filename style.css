@@ -410,6 +410,33 @@ form {
   margin-top: 0.3rem;
 }
 
+.note-pemesanan {
+  background-color: #fff7fa;
+  border-left: 4px solid var(--primary);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.note-pemesanan p {
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.note-pemesanan ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.note-pemesanan li {
+  margin-bottom: 0.5rem;
+}
+
+
 /* Loading state */
 .loading {
   display: inline-flex;
