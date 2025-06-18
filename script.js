@@ -161,14 +161,15 @@ if (document.getElementById('formPemesanan')) {
 Terima kasih!! ✨🥰 Sudah melakukan order! Ditunggu ya, admin akan segera membalas pesan anda!
 
 Silakan melakukan pembayaran terlebih dahulu melalui BCA dan Shoppe Pay di bawah ya.😊
+
 Pembayaran tersebut hanya untuk *DEPOSIT* seharga Rp. 50.000!
 
 _Jika sudah melakukan pembayaran silahkan ditunggu konfirmasi ya_
 
--------------------------------
+----------------------------------------------------------------
 *BCA* : FRANJESSCA (0520473165)
 *Shoppe Pay* : FRANJESSCAFC (081268556553)
--------------------------------
+----------------------------------------------------------------
 
 *NOTE:*
 Jika admin belum membalas pesan anda, mungkin sedang melayani customer, atau sedang dalam kendala. 
